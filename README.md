@@ -46,3 +46,24 @@ Criar imagem com dockerfile: docker build -t alineassuncao/hello .
 Rodando:
 docker run --rm alineassuncao/hello
 docker run --rm alineassuncao/hello "Aline"
+
+## Comandos network Bridge
+docker network
+docker network ls
+docker network create --driver bridge minharede
+
+EXEMPLO 1
+docker run -dit --name ubuntu1 --network minharede bash
+docker run -dit --name ubuntu2 --network minharede bash
+docker exec -it ubuntu1 bash
+ping ubuntu2
+
+EXEMPLO 2
+docker run -dit --name ubuntu3 bash
+docker network connect minharede ubuntu3
+docker inspect minharede
+
+## Comandos network host
+docker network
+docker network ls
+docker run --rm -d --name nginx --network host nginx
