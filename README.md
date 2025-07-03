@@ -1,6 +1,7 @@
 # docker
 
-
+docker exec -it php8 bash 
+docker build -t alineassuncao/laravel . 
 
 ## Comandos utilizados exemplo 1
 
