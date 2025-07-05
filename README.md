@@ -2,6 +2,12 @@
 
 docker exec -it php8 bash 
 docker build -t alineassuncao/laravel . 
+docker run --rm -d --name laravel -p 8000:8000
+*docker run -p 8000:8000 alineassuncao/laravel
+docker logs laravel
+docker run --rm -it -v "${pwd}/:/usr/src/app" -p 3000:3000 node:15 bash
+docker run --rm -it -v "$(pwd):/usr/src/app" -p 3000:3000 node:20 bash
+docker run -p 3000:3000 alineassuncao/hello-express
 
 ## Comandos utilizados exemplo 1
 
@@ -68,3 +74,5 @@ docker inspect minharede
 docker network
 docker network ls
 docker run --rm -d --name nginx --network host nginx
+
+## Gerando uma imagem da aplicação
