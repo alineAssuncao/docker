@@ -75,4 +75,6 @@ docker network
 docker network ls
 docker run --rm -d --name nginx --network host nginx
 
-## Gerando uma imagem da aplicação
+## Otimizando imagens
+docker run -d --network laranet --name laravel alineassuncao/laravel:prod2
+docker run -d --network laranet --name nginx -p 8080:80 alineassuncao/nginx:prod2 
