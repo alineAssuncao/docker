@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  laravel:
+    image: alineassuncao/laravel:prod2
+    container_name: laravel
+    networks:
+      - laranet
+
+  nginx:
+    image: alineassuncao/nginx:prod2
+    container_name: nginx
+    ports:
+      - "8080:80"
+    networks:
+      - laranet
+
+networks:
+    laranet:
+      driver: bridge
