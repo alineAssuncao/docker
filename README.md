@@ -8,6 +8,7 @@ docker logs laravel
 docker run --rm -it -v "${pwd}/:/usr/src/app" -p 3000:3000 node:15 bash
 docker run --rm -it -v "$(pwd):/usr/src/app" -p 3000:3000 node:20 bash
 docker run -p 3000:3000 alineassuncao/hello-express
+docker exec -it app bash
 
 ## Comandos utilizados exemplo 1
 
@@ -76,5 +77,18 @@ docker network ls
 docker run --rm -d --name nginx --network host nginx
 
 ## Otimizando imagens
-docker run -d --network laranet --name laravel alineassuncao/laravel:prod2
-docker run -d --network laranet --name nginx -p 8080:80 alineassuncao/nginx:prod2 
+docker run -d --network laranet --name laravel alineassuncao/laravel:prod
+docker run -d --network laranet --name nginx -p 8080:80 alineassuncao/nginx:prod
+
+## docker-compose
+docker-compose up -d 
+docker-compose up -d --build
+docker-compose down
+docker-compose ps  
+
+## Tratamento de dependência
+https://github.com/jwilder/dockerize
+dockerize -wait tcp://db:3306
+
+https://github.com/codeedu/docker-wait-for-it 
+https://github.com/devfullcycle/docker-healthcheck

@@ -2,20 +2,35 @@ version: '3'
 
 services:
 
-  laravel:
-    image: alineassuncao/laravel:prod2
-    container_name: laravel
+  app:
+    build:
+      context: node
+    container_name: app
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
     networks:
-      - laranet
-
-  nginx:
-    image: alineassuncao/nginx:prod2
-    container_name: nginx
+      - node-network
+    volumes:
+      - ./node:/usr/src/app
+    tty: true
     ports:
-      - "8080:80"
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
     networks:
-      - laranet
+      - node-network
 
 networks:
-    laranet:
+    node-network:
       driver: bridge
